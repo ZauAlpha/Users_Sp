@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Users Sp</string>
+    <string name="description_user_photo">Imagen del usuario</string>
+</resources>
