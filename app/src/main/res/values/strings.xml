@@ -7,4 +7,5 @@
     <string name="helper_username">Obligatorio</string>
     <string name="hint_username">Nombre de Usuario</string>
     <string name="sp_username">Username</string>
+    <string name="material_alert_invitado">Invitado</string>
 </resources>

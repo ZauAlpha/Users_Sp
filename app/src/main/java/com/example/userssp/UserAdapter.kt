@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.userssp.databinding.ItemUserBinding
+import com.example.userssp.databinding.ItemUserAltBinding
 
 
 class UserAdapter(val users: List<User>) : RecyclerView.Adapter<UserAdapter.UserHolder>() {
@@ -15,20 +15,20 @@ class UserAdapter(val users: List<User>) : RecyclerView.Adapter<UserAdapter.User
     private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
         context = parent.context
-        val view = LayoutInflater.from(context).inflate(R.layout.item_user, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_user_alt, parent, false)
         return UserHolder(view)
     }
 
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         val user = users[position]
         with(holder) {
-            binding.tvOrder.text = (position + 1).toString()
-            binding.tvName.text = user.getFullName()
+            itemUserAltBinding.tvOrder.text = (position + 1).toString()
+            itemUserAltBinding.tvName.text = user.getFullName()
             Glide.with(context)
                 .load(user.url).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .circleCrop()
-                .into(binding.imgPhoto)
+                .into(itemUserAltBinding.imgPhoto)
         }
     }
 
@@ -36,7 +36,7 @@ class UserAdapter(val users: List<User>) : RecyclerView.Adapter<UserAdapter.User
 
 
     inner class UserHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ItemUserBinding.bind(view)
+        val itemUserAltBinding = ItemUserAltBinding.bind(view)
 
     }
 }

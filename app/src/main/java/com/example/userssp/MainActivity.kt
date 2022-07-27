@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.userssp.databinding.ActivityMainBinding
+import com.example.userssp.databinding.DialogRegisterBinding
 import com.example.userssp.databinding.ItemUserBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -23,16 +25,18 @@ class MainActivity : AppCompatActivity() {
         val preferences = getPreferences(Context.MODE_PRIVATE)
         val isFirstTime = preferences.getBoolean(getString(R.string.sp_first_time), true)
         if (isFirstTime) {
-            val dialogView = layoutInflater.inflate(R.layout.dialog_register, null)
+            val dialogBinding = DialogRegisterBinding.inflate(layoutInflater)
+            // val dialogView = layoutInflater.inflate(R.layout.dialog_register, null)
             MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title)
-                .setView(dialogView)
+                .setView(dialogBinding.root)
                 .setCancelable(false)
+                .setNeutralButton(R.string.material_alert_invitado,null)
                 .setPositiveButton(
                     R.string.dialog_confirm
                 ) { dialogInterface, i ->
                     val username =
-                        dialogView.findViewById<TextInputEditText>(R.id.etUserName).text.toString()
+                        dialogBinding.etUserName.text.toString()
                     with(preferences.edit()) {
                         putBoolean(getString(R.string.sp_first_time), false)
                         putString(getString(R.string.sp_username), username)
@@ -40,6 +44,10 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 .show()
+        }
+        else{
+            val username = preferences.getString(getString(R.string.sp_username),getString(R.string.hint_username))
+            Toast.makeText(this, "Bienvenido $username", Toast.LENGTH_SHORT).show()
         }
 
 
